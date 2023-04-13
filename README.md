@@ -1,18 +1,24 @@
 # langchain-dapr-bindings
 
-A sample integrating Dapr AI bindings with langchain.
+A sample integrating Dapr AI bindings with [langchain](https://github.com/hwchase17/langchain).
 
 ## Background
 
-Langchain already has integrations for many different language models, so why is this needed? Each of those integrations requires very specific choices being made at application implementation time--which models to support and how to configure them--as well as imposes a set of dependencies on the application for each supported model.
+`langchain` already has integrations for many different language models, so why is this needed? Each of those integrations requires very specific choices being made at application implementation time--which models to support and how to configure them--as well as imposes a set of dependencies on the application for each supported model.
 
-With Dapr, the application can use langchain but in a way that allows those decisions to be made at deployment time, through configuration, without any changes to application code and does not impose model-specific dependencies on the application (aside from the Dapr langchain binding and Dapr Client SDK itself).
+With Dapr, the application can use langchain but in a way that allows those decisions to be made at deployment time, through configuration, without any changes to application code and does not impose model-specific dependencies on the application (aside from the Dapr `langchain` binding and Dapr Client SDK itself).
+
+## Architecture
+
+This sample creates several custom implementations of the `langchain` language model and memory classes, which redirect their calls to one of the Dapr output bindings in the `dapr-ai-bindings` sample, or to a standard Dapr state store in the case of the memory implementation.
+
+![Architecture Diagram](assets/langchain-dapr-bindings-diagram.png)
 
 ## Prerequisites
 
 - [Python](https://www.python.org/) 3.10 or later
 - [Dapr](https://dapr.io/) 1.10 or later
-- [Langchain](https://github.com/hwchase17/langchain) 0.0.137 or later
+- [langchain](https://github.com/hwchase17/langchain) 0.0.137 or later
 - [Dapr AI Bindings](https://github.com/philliphoff/dapr-ai-bindings)
 
 ## Using the bindings
